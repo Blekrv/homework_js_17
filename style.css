@@ -5,8 +5,11 @@
       margin-bottom:10px;
       
   }
+  li i{
+      margin-right: 10px;
+  }
   #overlay{
-    height: 100vh;
+    height: 0;
     width: 100%;
     position: fixed; 
     z-index: 1; 
