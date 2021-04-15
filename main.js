@@ -15,28 +15,42 @@ function preLoader() {
   });
   let $details = document.querySelector(".details"),
     $trambon = document.querySelector(".jumbotron");
-  function person() {
-    return {
-      firstname: firstname.value.trim(),
-      lastname: lastname.value.trim(),
-      phone: phone.value.trim(),
-      email: email.value.trim(),
-      location: loc.value.trim(),
-    };
-  }
+
   // console.log(localStorage.key(0))
   function checkStorage() {
     for (let i = 0; i < localStorage.length; i++) {
       let user = JSON.parse(localStorage.getItem(localStorage.key(i)));
       addCard(user);
-      // buttonDelete = document.querySelectorAll('.delete')
-      // buttonDelete[i].addEventListener('click', ()=>{
-      //   console.log(i)
-      //   localStorage.removeItem(`${user}`)
-      // })
+      // deleteItem(user)
+     
     }
   }
   checkStorage();
+  let buttonDelete = document.querySelectorAll(".delete");
+  console.log(buttonDelete);
+  for(let i = 0; i < buttonDelete.length; i++){
+ let buttonDelete = document.querySelectorAll('.delete')
+      buttonDelete[i].addEventListener('click', ()=>{
+        console.log(i)
+        localStorage.removeItem(localStorage.key(i))
+        $trambon.innerHTML = "";
+        checkStorage();
+      })
+    }
+  function deleteItem(i) {
+ 
+      $trambon.addEventListener("click", function (event) {
+        if(event.target.tagName == 'BUTTON'){
+          console.log(localStorage.key(this))
+        localStorage.removeItem(user.email);
+        $trambon.innerHTML = "";
+        checkStorage();
+        }
+
+      });
+  }
+
+    // deleteItem();
   function addCard(user) {
     $trambon.insertAdjacentHTML(
       "afterbegin",
@@ -61,19 +75,14 @@ function preLoader() {
 `
     );
   }
-  let buttonDelete = document.querySelectorAll(".delete");
-  console.log(buttonDelete);
-  function deleteItem() {
-    for (let i = 0; i <= buttonDelete.length; i++) {
-      buttonDelete[i].addEventListener("click", function () {
-        localStorage.removeItem(localStorage.key(i));
-        $trambon.innerHTML = "";
-        checkStorage();
-      });
+    function person() {
+      return {
+        firstname: firstname.value.trim(),
+        lastname: lastname.value.trim(),
+        phone: phone.value.trim(),
+        email: email.value.trim(),
+        location: loc.value.trim(),
+      };
     }
-  }
-
-    deleteItem();
-
 }
 document.addEventListener("DOMContentLoaded", preLoader);
